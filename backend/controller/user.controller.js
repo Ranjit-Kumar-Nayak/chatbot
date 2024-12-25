@@ -27,6 +27,20 @@ export const login = async (req, res) => {
 
 
 export const logout=async (req,res)=>{
-  res.clearCookie('authToken');
-  res.json({message:'user logged out successfully'});
+  try {
+
+    // const token = req.cookies.authToken || req.headers.authorization.split(' ')[ 1 ];
+    const token = req.cookies.authToken || (req.headers.authorization && req.headers.authorization.split(' ')[1]);
+
+    // redisClient.set(token, 'logout', 'EX', 60 * 60 * 24);
+
+    res.status(200).json({
+        message: 'Logged out successfully'
+    });
+
+
+} catch (err) {
+    console.log(err);
+    res.status(400).send(err.message);
+}
 }
