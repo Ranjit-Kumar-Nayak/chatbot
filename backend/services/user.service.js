@@ -47,6 +47,7 @@ export const loginUser=async({email,password})=>{
         if(!token){
             throw new Error('Failed to generate token****')
         }
+     
         return {token:token,user:user} 
     } catch (error) {
         console.log(error.message);
