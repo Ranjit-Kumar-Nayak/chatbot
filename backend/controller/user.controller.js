@@ -1,4 +1,5 @@
 import { loginUser, registerUser } from "../services/user.service.js";
+import redisClient from "../services/redis.service.js";
 
 export const register = async (req, res) => {
   try {
@@ -31,7 +32,7 @@ export const logout=async (req,res)=>{
 
     // const token = req.cookies.authToken || req.headers.authorization.split(' ')[ 1 ];
     const token = req.cookies.authToken || (req.headers.authorization && req.headers.authorization.split(' ')[1]);
-
+    redisClient.set(token, 'logout', 'EX', 60 * 60 * 24);
     // redisClient.set(token, 'logout', 'EX', 60 * 60 * 24);
 
     res.status(200).json({
