@@ -12,4 +12,4 @@ app.use(cors({}))
 // routes
 app.use('/api/v1/users',userRoute)
 
-export default app;
+export default app; 
